@@ -7,16 +7,16 @@ fn main() {
 
 fn read_all() -> (Vec<(u8, Vec<u8>)>, Vec<(u8, Vec<u8>)>, Vec<String>) {
     let data_files = vec![
-        "../cifar-10/cifar-10-batches-bin/data_batch_1.bin",
-        "../cifar-10/cifar-10-batches-bin/data_batch_2.bin",
-        "../cifar-10/cifar-10-batches-bin/data_batch_3.bin",
-        "../cifar-10/cifar-10-batches-bin/data_batch_4.bin",
-        "../cifar-10/cifar-10-batches-bin/data_batch_5.bin",
+        "./cifar-10-batches-bin/data_batch_1.bin",
+        "./cifar-10-batches-bin/data_batch_2.bin",
+        "./cifar-10-batches-bin/data_batch_3.bin",
+        "./cifar-10-batches-bin/data_batch_4.bin",
+        "./cifar-10-batches-bin/data_batch_5.bin",
     ];
     let test_file = vec![
-        "../cifar-10/cifar-10-batches-bin/data_batch_5.bin",
+        "./cifar-10-batches-bin/test_batch.bin",
     ];
-    let label_file = "../cifar-10/batches.meta.txt";
+    let label_file = "./cifar-10-batches-bin/batches.meta.txt";
 
     let labels = read_labels(label_file);
     let train = read_files(data_files);
