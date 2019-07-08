@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::prelude::*;
 
-fn read_all() -> (Vec<(u8, Vec<u8>)>, Vec<(u8, Vec<u8>)>, Vec<String>) {
+pub fn read_all() -> (Vec<(u8, Vec<u8>)>, Vec<(u8, Vec<u8>)>, Vec<String>) {
     let data_files = vec![
         "./cifar-10-batches-bin/data_batch_1.bin",
         "./cifar-10-batches-bin/data_batch_2.bin",
