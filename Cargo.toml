@@ -1,5 +1,5 @@
 [package]
-name = "cifar-10"
+name = "cifar10"
 version = "0.1.0"
 authors = ["Marcos Silveira <bymarkone@gmail.com>"]
 edition = "2018"
