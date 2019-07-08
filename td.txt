@@ -1,0 +1,2 @@
+- Is this the better way of refering to a list of string (file names) in Rust?
+- Add integration tests for the public functions
