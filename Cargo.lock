@@ -3,4 +3,11 @@
 [[package]]
 name = "cifar10"
 version = "0.1.0"
+dependencies = [
+ "linalg 0.1.0",
+]
+
+[[package]]
+name = "linalg"
+version = "0.1.0"
 

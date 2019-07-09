@@ -1,5 +1,14 @@
+use linalg::Matrix;
 use std::fs::File;
 use std::io::prelude::*;
+
+pub fn training_data() -> (Matrix<u8>, Matrix<u8>) {
+    read_files_matrix(train_files())
+}
+
+pub fn test_data() -> (Matrix<u8>, Matrix<u8>) {
+    read_files_matrix(test_file())
+}
 
 pub fn read_train_data() -> (Vec<u8>, Vec<Vec<u8>>) {
     read_files_unzipped(train_files())
@@ -21,17 +30,26 @@ fn read_files(files: Vec<&str>) -> Vec<(u8, Vec<u8>)> {
     files.iter().map(|f| read_file(f)).flatten().collect()
 }
 
+fn read_files_unzipped(files: Vec<&str>) -> (Vec<u8>, Vec<Vec<u8>>) {
+    files.iter().map(|f| read_file(f)).flatten().unzip()
+}
+
+fn read_files_matrix(files: Vec<&str>) -> (Matrix<u8>, Matrix<u8>) {
+    let (labels, data): (Vec<u8>, Vec<Vec<u8>>) = files.iter().flat_map(|f| read_file(f)).unzip();
+    
+    let label_matrix = Matrix{rows: labels.len(), cols: 1, data: labels};
+    let data_matrix = Matrix{rows: data.len(), cols: 3072, data: data.into_iter().flatten().collect()};
+
+    (label_matrix, data_matrix)
+}
+
 fn read_file(file: &str) -> Vec<(u8, Vec<u8>)> {
     let mut buffer = Vec::new();
     let mut file = File::open(file).expect("no file");
     file.read_to_end(&mut buffer).expect("error reading");
-    buffer.chunks(3072)
+    buffer.chunks(3073)
         .map(|c| (c[0], c[1..].to_vec()))
         .collect()
-}
-
-fn read_files_unzipped(files: Vec<&str>) -> (Vec<u8>, Vec<Vec<u8>>) {
-    files.iter().map(|f| read_file(f)).flatten().unzip()
 }
 
 fn read_labels(file: &str) -> Vec<String> {
